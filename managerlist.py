@@ -8,6 +8,7 @@ class Main(IPlugin):
                 IPlugin.__init__(self,name,tasclient)
 
 	def oncommandfromserver(self,command,args,socket):
+	  print command + " ".join(args) + "\n"
 	  if command == "SAIDPRIVATE" and len(args) >= 2:
 	    if args[1].lower() == "!listmanagers":
 	      socket.send("SAYPRIVATE %s managerlist %s\n" % ( args[0] , '\t'.join(tasbot.ParseConfig.parselist(self.app.config["managerlist"],','))))
