@@ -3,12 +3,13 @@ import string
 import tasbot
 from tasbot.Plugin import IPlugin
 from tasbot.utilities import *
+from tasbot.customlog import Log
 class Main(IPlugin):
         def __init__(self,name,tasclient):
                 IPlugin.__init__(self,name,tasclient)
 
 	def oncommandfromserver(self,command,args,socket):
-	  print command + " ".join(args) + "\n"
+	  self.logger.Info( command + " ".join(args) )
 	  if command == "SAIDPRIVATE" and len(args) >= 2:
 	    if args[1].lower() == "!listmanagers":
 	      socket.send("SAYPRIVATE %s managerlist %s\n" % ( args[0] , '\t'.join(tasbot.ParseConfig.parselist(self.app.config["managerlist"],','))))
